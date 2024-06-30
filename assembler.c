@@ -29,9 +29,9 @@ int main(int argc, char ** argv)
 	
 	char * asm_file_name  	 = argv[1];
 	
-	FILE * asm_file 	  	 = NULL;
+	FILE * asm_file 	 = NULL;
 	
-	char * period_ptr 		 = strchr(asm_file_name, '.');
+	char * period_ptr 	 = strchr(asm_file_name, '.');
 	
 	unsigned int stem_length = period_ptr - asm_file_name;
 	
@@ -217,9 +217,9 @@ bool is_register(char * s)
 {
 	unsigned int number = atoi(s + 1);
 	
-	if(!(s[0] == 'R')) 	  			   return false;
-	if(strlen(s + 1) > 2) 			   return false;
-	if(!is_number(s + 1))  			   return false;
+	if(!(s[0] == 'R')) 	  	   return false;
+	if(strlen(s + 1) > 2) 		   return false;
+	if(!is_number(s + 1))  	           return false;
 	if(!(number >= 0 && number <= 15)) return false;
 	
 	return true;
@@ -265,7 +265,7 @@ unsigned int add_symbol(SYMBOL_TABLE * st, char * symbol, int line_number)
 	if (st->size >= st->capacity)
 	{
 		st->capacity *= 2;
-		st->symbols   =    	   (char **) realloc(st->symbols, st->capacity);
+		st->symbols   =        (char **) realloc(st->symbols, st->capacity);
 		st-> values   = (unsigned int *) realloc(st->values , st->capacity);
 	}
 	
@@ -291,7 +291,7 @@ uint16_t jump_bits(char * jump_instruction)
 {
 	enum JUMP_CONDITION jump_instruction_code = NO_JMP;
 			
-		 if (strcmp(jump_instruction, "JMP") == 0) jump_instruction_code = JMP;
+	     if (strcmp(jump_instruction, "JMP") == 0) jump_instruction_code = JMP;
 	else if (strcmp(jump_instruction, "JLT") == 0) jump_instruction_code = JLT;
 	else if (strcmp(jump_instruction, "JGT") == 0) jump_instruction_code = JGT;
 	else if (strcmp(jump_instruction, "JGE") == 0) jump_instruction_code = JGE;
@@ -313,7 +313,7 @@ uint16_t destination_bits(char *destination_string)
 {
 	enum DENSTINATION destination_bits;
 			
-		 if (strcmp(destination_string, "A")   == 0)  destination_bits =   A;
+	     if (strcmp(destination_string, "A")   == 0)  destination_bits =   A;
 	else if (strcmp(destination_string, "M")   == 0)  destination_bits =   M;
 	else if (strcmp(destination_string, "D")   == 0)  destination_bits =   D;
 	else if (strcmp(destination_string, "AD")  == 0)  destination_bits =  AD;
@@ -335,13 +335,13 @@ uint16_t comp_bits(char * comp_string)
 		char a_bit = 0;
 		enum COMP comp_bits;
 		
-			 if (strcmp(comp_string,   "0") == 0) 						      		comp_bits = COMP_ZERO;
-		else if (strcmp(comp_string,   "1") == 0) 						      		comp_bits = COMP_ONE;
-		else if (strcmp(comp_string,  "-1") == 0) 							  		comp_bits = COMP_MINUS_ONE;
-		else if (strcmp(comp_string,   "D") == 0) 						      		comp_bits = COMP_D;
-		else if (strcmp(comp_string,  "!D") == 0) 							  		comp_bits = COMP_NOT_D;
-		else if (strcmp(comp_string, "D+1") == 0) 						      		comp_bits = COMP_D_PLUS_ONE;
-		else if (strcmp(comp_string, "D-1") == 0) 							  		comp_bits = COMP_D_MINUS_ONE;
+		if (strcmp(comp_string,   "0") == 0) 					    comp_bits = COMP_ZERO;
+		else if (strcmp(comp_string,   "1") == 0) 				    comp_bits = COMP_ONE;
+		else if (strcmp(comp_string,  "-1") == 0) 				    comp_bits = COMP_MINUS_ONE;
+		else if (strcmp(comp_string,   "D") == 0) 				    comp_bits = COMP_D;
+		else if (strcmp(comp_string,  "!D") == 0) 				    comp_bits = COMP_NOT_D;
+		else if (strcmp(comp_string, "D+1") == 0) 				    comp_bits = COMP_D_PLUS_ONE;
+		else if (strcmp(comp_string, "D-1") == 0) 				    comp_bits = COMP_D_MINUS_ONE;
 		else if (strcmp(comp_string,  "!A") == 0 | strcmp(comp_string,  "!M") == 0) comp_bits = COMP_NOT_A_OR_NOT_M;
 		else if (strcmp(comp_string,   "A") == 0 | strcmp(comp_string,   "M") == 0) comp_bits = COMP_A_OR_M;
 		else if (strcmp(comp_string,  "-A") == 0 | strcmp(comp_string,  "-M") == 0) comp_bits = COMP_MINUS_A_OR_MINUS_M;
@@ -419,7 +419,7 @@ uint16_t translate(char *instruction, SYMBOL_TABLE *st)
 				if(strcmp(address_string, "ARG") 	 == 0) return ARG;
 				if(strcmp(address_string, "THIS") 	 == 0) return THIS;
 				if(strcmp(address_string, "THAT")	 == 0) return THAT;
-				if(strcmp(address_string, "SCREEN")  == 0) return SCREEN;
+				if(strcmp(address_string, "SCREEN")      == 0) return SCREEN;
 				if(strcmp(address_string, "KBD")	 == 0) return KBD;
 
 				unsigned int * val  = NULL;
